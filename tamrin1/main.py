@@ -9,7 +9,10 @@ from PySide6.QtWidgets import *
 from PySide6.QtGui import QPixmap,QImage
 import cv2
 
-
+import os
+import glob
+# cookie_del = glob.glob("config/__zahra.zarrabi98_uuid_and_cookie.json")
+# os.remove(cookie_del[0])
 # convert an opencv image to Qpixmap
 def ConvertCvimage2Qtimage(cv_image):
     # cv_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
@@ -50,6 +53,8 @@ class Main(QWidget):
         self.ui.btn_start.clicked.connect(self.startfacedetection)
         self.ui.btn_Screenshot.clicked.connect(self.Take_Screenshot)
 
+        self.ui.btn_post.clicked.connect(self.my_post_insta)
+
     def openImage(self):
         image_path=QFileDialog.getOpenFileName(self,'open your image')
         self.image_path=image_path[0]
@@ -68,10 +73,29 @@ class Main(QWidget):
     def Take_Screenshot(self):
         self.preview_screen = QApplication.primaryScreen().grabWindow(0)
         self.ui.label_screen.setPixmap(self.preview_screen.scaled(350, 350, Qt.KeepAspectRatio, Qt.SmoothTransformation))
-        img, _ = QFileDialog.getSaveFileName(self, "Save your image")
-        self.preview_screen.save(img)
-        self.ui.label_screen.hide()
+        img,_ = QFileDialog.getSaveFileName(self, "Save your image")
+        self.preview_screen.save(img,'')
 
+    def my_post_insta(self):
+        self.post=my_post()
+        self.post.start()
+
+        msg_box = QMessageBox()
+        msg_box.setText('end')
+        msg_box.exec_()
+
+from instabot import Bot
+class my_post(QThread):
+    signal_image= Signal()
+    def __init__(self):
+        super(my_post, self).__init__()
+
+    def run(self):
+        bot=Bot()
+        bot.login(username='username',password='password', is_threaded=True)
+        bot.upload_photo('imgpy.jpg',caption='Souvenir post from Python class 💻️')
+
+        self.signal_image.emit()
 
 if __name__ == "__main__":
     app = QApplication([])

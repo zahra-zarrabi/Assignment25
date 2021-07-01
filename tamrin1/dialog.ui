@@ -14,17 +14,23 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="6" column="0" colspan="4">
+   <item row="6" column="0" colspan="5">
     <widget class="QLabel" name="label_image">
      <property name="text">
       <string/>
      </property>
     </widget>
    </item>
-   <item row="0" column="3">
-    <widget class="QPushButton" name="btn_browse">
+   <item row="5" column="2" colspan="3">
+    <widget class="QPushButton" name="btn_start">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
      <property name="text">
-      <string>browse</string>
+      <string>Start Face Detection</string>
      </property>
     </widget>
    </item>
@@ -38,20 +44,21 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="2" colspan="2">
-    <widget class="QPushButton" name="btn_start">
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>16777215</height>
-      </size>
-     </property>
+   <item row="0" column="4">
+    <widget class="QPushButton" name="btn_browse">
      <property name="text">
-      <string>Start Face Detection</string>
+      <string>browse</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="0" colspan="4">
+   <item row="8" column="4">
+    <widget class="QPushButton" name="btn_post">
+     <property name="text">
+      <string>Post in Instagram</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0" rowspan="2" colspan="3">
     <widget class="QLabel" name="label_screen">
      <property name="text">
       <string/>
